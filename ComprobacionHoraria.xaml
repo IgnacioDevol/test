@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="HorarioApertura" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="HorarioApertura" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="out_Operativo" Type="OutArgument(x:Boolean)" />
     <x:Property Name="in_HorarioCierre" Type="InArgument(x:String)" />
@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>711,1309</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>711,1347</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>HorarioApertura_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="42">
@@ -32,6 +32,7 @@
       <x:String>UiPath.Core.Activities</x:String>
       <x:String>System.Windows.Markup</x:String>
       <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.CV</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -57,9 +58,10 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>System.ServiceModel</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="HorarioApertura" sap:VirtualizedContainerService.HintSize="691,1209" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="HorarioApertura" sap:VirtualizedContainerService.HintSize="691,1247" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:TimeSpan" Name="HoraActual" />
       <Variable x:TypeArguments="s:String[]" Name="CierreArray" />
@@ -71,9 +73,9 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="649,1117" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="649,1155" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <TryCatch.Try>
-        <Sequence sap:VirtualizedContainerService.HintSize="611,890" sap2010:WorkflowViewState.IdRef="Sequence_4">
+        <Sequence sap:VirtualizedContainerService.HintSize="611,928" sap2010:WorkflowViewState.IdRef="Sequence_4">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -81,20 +83,13 @@
           </sap:WorkflowViewStateService.ViewState>
           <ui:Comment sap:VirtualizedContainerService.HintSize="569,55" sap2010:WorkflowViewState.IdRef="Comment_1" Text="HOLA SOY JON Y ESTO ES UNA PRUEBA" />
           <ui:Comment DisplayName="Comment - De jon" sap:VirtualizedContainerService.HintSize="569,55" sap2010:WorkflowViewState.IdRef="Comment_2" Text="ESTO ES LA PRUEBA 2, DE JON EL RETORNO" />
+          <p:CvGetTextWithDescriptor DesignTimeScaleFactor="{x:Null}" DisplayName="CV Get Text" sap:VirtualizedContainerService.HintSize="569,98" sap2010:WorkflowViewState.IdRef="CvGetTextWithDescriptor_1" Version="V1" />
           <Assign DisplayName="Assign Hora Actual" sap:VirtualizedContainerService.HintSize="569,60" sap2010:WorkflowViewState.IdRef="Assign_1">
             <Assign.To>
               <OutArgument x:TypeArguments="x:TimeSpan">[HoraActual]</OutArgument>
             </Assign.To>
             <Assign.Value>
               <InArgument x:TypeArguments="x:TimeSpan">[Now.TimeOfDay]</InArgument>
-            </Assign.Value>
-          </Assign>
-          <Assign sap:VirtualizedContainerService.HintSize="569,60" sap2010:WorkflowViewState.IdRef="Assign_2">
-            <Assign.To>
-              <OutArgument x:TypeArguments="s:String[]">[CierreArray]</OutArgument>
-            </Assign.To>
-            <Assign.Value>
-              <InArgument x:TypeArguments="s:String[]">[in_HorarioCierre.Split("-".ToCharArray)]</InArgument>
             </Assign.Value>
           </Assign>
           <Assign sap:VirtualizedContainerService.HintSize="569,60" sap2010:WorkflowViewState.IdRef="Assign_3">
@@ -110,7 +105,7 @@
               <OutArgument x:TypeArguments="x:TimeSpan">[Abertura]</OutArgument>
             </Assign.To>
             <Assign.Value>
-              <InArgument x:TypeArguments="x:TimeSpan">[TimeSpan.Parse(CierreArray(1))]</InArgument>
+              <InArgument x:TypeArguments="x:TimeSpan">[TimeSpan.Parse(CierreArray(0))]</InArgument>
             </Assign.Value>
           </Assign>
           <If Condition="[HoraActual&gt;Abertura and HoraActual&lt;Cierre]" DisplayName="If esta dentro del horario " sap:VirtualizedContainerService.HintSize="569,208" sap2010:WorkflowViewState.IdRef="If_1">
